@@ -26,7 +26,7 @@ public class EmployerController {
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
-        model.addAttribute(new Employer());
+        model.addAttribute("employer", new Employer());
         return "employers/add";
     }
 
@@ -48,11 +48,11 @@ public class EmployerController {
 
         Optional<Employer> optEmployer = employerRepository.findById(employerId);
         if (optEmployer.isPresent()) {
-            Employer employer = optEmployer.get();
+            Employer employer = (Employer)optEmployer.get();
             model.addAttribute("employer", employer);
             return "employers/view";
         } else {
-            return "redirect:.../";
+            return "redirect:../";
         }
     }
 }
